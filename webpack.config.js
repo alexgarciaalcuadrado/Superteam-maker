@@ -22,5 +22,8 @@ module.exports = {
         filename: 'transformed.js',
         path: path.resolve(__dirname,'/build.js')
     },
-    plugins:[htmlPlugin]
+    plugins:[htmlPlugin],
+    devServer:{
+        historyApiFallback: true
+    }
 }
