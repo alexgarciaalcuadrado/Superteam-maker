@@ -1,35 +1,29 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from "axios";
+import grid from "../components/grid";
 
 
 class Seeker extends React.Component{
     state = {
-        name: ""
+        matchedHeros : [],
+        addHeroAction : false
     }
     constructor(){
         super();
-        this.onChange = this.onChange.bind(this);
-        this.onClick = this.onClick.bind(this);
+        this.fetchData = this.fetchData.bind(this);
     }
 
-    /* fetchData(){
-            axios.get(`https://www.superheroapi.com/api.php/1589015884770221`)
-        .then((response) => {
-            console.log(response.data)
-        }).catch((error) => {
-            console.log(error)
-        });
-        } */    
 
-    onChange(e){
-        this.setState({ name: e.target.value})
-    }
-
-    onClick(e){
-        e.preventDefault();
-        console.log(this.state.name);
-    }
+    fetchData(name){
+        axios.get(`https://www.superheroapi.com/api.php/1589015884770221/search/${name}`)
+    .then((response) => {
+        this.setState({matchedHeros : response.data.results});
+        localStorage.setItem("addHeroAction", true);
+    }).catch((error) => {
+        console.log(error)
+    });
+    }     
 
     
     render(){
@@ -49,11 +43,8 @@ class Seeker extends React.Component{
                         }
                         return errors;
                     }}
-                    onSubmit={(values, { setSubmitting }) => {
-                        setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                        }, 400);
+                    onSubmit={(values) => {
+                        this.fetchData(values.name);
                     }}
                     >
                     {({ isSubmitting }) => (
@@ -66,7 +57,26 @@ class Seeker extends React.Component{
                         </Form>
                     )}
                     </Formik>
-
+                    {this.state.matchedHeros.length ?  
+                        (
+                        <div className="grid__background">
+                            <div className="grid">
+                                <div className="grid__box grid__top grid__top--container"></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Name</h2></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Intelligence</h2></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Strenght</h2></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Speed</h2></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Durability</h2></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Power</h2></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Combat</h2></div>
+                                <div className="grid__box grid__top grid__top--container"></div>
+                            </div>
+                        </div>
+                        )
+                        :
+                        <div></div>
+                    }
+                    {this.state.matchedHeros.map(hero => grid(hero, hero.id))}
             </div>
             )
     }

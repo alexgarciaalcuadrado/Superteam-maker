@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import grid from "../components/grid";
 
 class Home extends React.Component{
     state = {
@@ -17,11 +18,27 @@ class Home extends React.Component{
                 <nav>
                     <Link to="/seeker">Seek new heros!</Link>
                 </nav>
-                <h1>The powerstats are: </h1>
-                <ul>
-                    <li>1</li>
-                    <li>2</li>
-                </ul>
+                <h1>Your team</h1>
+                {this.state.heros.length ?  
+                        (
+                        <div className="grid__background">
+                            <div className="grid">
+                                <div className="grid__box grid__top grid__top--container"></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Name</h2></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Intelligence</h2></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Strenght</h2></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Speed</h2></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Durability</h2></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Power</h2></div>
+                                <div className="grid__box grid__top grid__top--container"><h2>Combat</h2></div>
+                                <div className="grid__box grid__top grid__top--container"></div>
+                            </div>
+                        </div>
+                        )
+                        :
+                        <div></div>
+                    }
+                    {this.state.heros.map(hero => grid(hero, hero.id))}
             </div>
             )
     }
