@@ -1,12 +1,14 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 const addToTeam = (hero) => {
+    const history = useNavigate();
     const onClick = (e) =>{
         e.preventDefault();
-        // 1- create login page to generate localSotrage for each user
-        // 2- when created token for said user, set "heros" array to 0 if it's the first time that user logs in
-        // 3- then add heros to the "heros" array of that user with localstorage
-        // 4- log out and log in again to see if the data was saved
+        let previousHeros = localStorage.getItem("heros");
+        previousHeros.push(hero);
+        localStorage.setItem("addHeroAction", false);
+        history("/home");
     }
     return(
         <div>
