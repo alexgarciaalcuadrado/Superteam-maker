@@ -58,6 +58,7 @@ const Login = () => {
               handleSubmit
             }) => (
             <form onSubmit={handleSubmit}>
+                <label name="email">Your email</label>
               <input
                 type="email"
                 name="email"
@@ -66,6 +67,7 @@ const Login = () => {
                 value={values.email}
               />
               {errors.email && touched.email && errors.email}
+              <label name="password">Your password</label>
               <input
                 type="password"
                 name="password"
