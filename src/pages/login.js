@@ -33,7 +33,8 @@ const Login = () => {
                     let token = response.data.token
                     localStorage.setItem("token", token);
                     localStorage.setItem("addHeroAction", false);
-                    localStorage.setItem("heros", []);
+                    const prevHeros = localStorage.getItem("heros") ? localStorage.getItem("heros") : [];
+                    localStorage.setItem("heros", prevHeros);
                     history("/home")
                 })
                 .catch(error => {

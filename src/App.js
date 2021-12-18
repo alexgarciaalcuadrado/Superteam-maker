@@ -9,14 +9,18 @@ import NotFound from "./pages/notFound";
 import Login from "./pages/login";
 
 
-ReactDOM.render(
-    <BrowserRouter history={createBrowserHistory}> 
+const App = () => (
+        <BrowserRouter history={createBrowserHistory}> 
         <Routes>
             <Route path="/" element={<Login />}/>
             <Route path="/home" element={<Home />}/>
             <Route path="seeker" element={<Seeker />} />
             <Route path="*" element={<NotFound />}/>
         </Routes>   
-    </BrowserRouter>,
+    </BrowserRouter>
+)
+
+ReactDOM.render(
+    <App />,
     document.getElementById("root"))
 

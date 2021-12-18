@@ -6,6 +6,8 @@ const addToTeam = (hero) => {
     const onClick = (e) =>{
         e.preventDefault();
         let previousHeros = localStorage.getItem("heros");
+        console.log(previousHeros)
+        console.log(hero)
         previousHeros.push(hero);
         localStorage.setItem("addHeroAction", false);
         history("/home");
@@ -18,7 +20,17 @@ const addToTeam = (hero) => {
 };
 
 const deleteFromTeam = (hero) => {
-    console.log(false)
+    const history = useNavigate();
+    const onClick = (e) =>{
+        e.preventDefault();
+        let previousHeros = localStorage.getItem("heros");
+        console.log(hero)
+    }
+    return(
+        <div>
+            <button onClick={onClick}>Delete hero from team</button>
+        </div>
+    )
 }
 
 export {addToTeam, deleteFromTeam};

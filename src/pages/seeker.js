@@ -1,26 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from "axios";
-import grid from "../components/grid";
+require("babel-core/register");
+require("babel-polyfill");
+import GridRender from "../components/gridRender";
+import Home from "./home";
 
-/* const Seeker = () => {
+async function getHeros(name) {
+    return axios.get(
+        `https://www.superheroapi.com/api.php/1589015884770221/search/${name}`
+    );
+} 
 
-    const [matchedHeros, setMatchedHeros] = useState([]);
+const Seeker = (props) => {
+    const heros = props.heros;
+    console.log(heros)
+    const navigate = useNavigate();         
+    const [searchedHero, setSearchedHero] = useState("")
+    const [matchedHeros, setMatchedHeros] = useState([]); 
 
-    const fetchData = (name) => {
-        const data  = axios.get(`https://www.superheroapi.com/api.php/1589015884770221/search/${name}`)
-        .then((response) => {
+    useEffect(() => {
+        getHeros(searchedHero).then((heros) => {
+            const hero = heros.data.response != "error" ? heros.data.results : []
             localStorage.setItem("addHeroAction", true);
-            let results = response.data.results;
-            return results
-        }).catch((error) => {
-            console.log(error)
-        })
-        setMatchedHeros(data);
-    }
+            setMatchedHeros(hero);
+        }, console.error);
+    }, [searchedHero]);
+    
+    
 
     return (
         <div>
+            <button onClick={() => {<Home heros={"hero1"}/>}}>Go back home</button>
             <h1>Find your next teammate!</h1>
                 <Formik
                 initialValues={{ name: ''}}
@@ -36,7 +48,7 @@ import grid from "../components/grid";
                     return errors;
                 }}
                 onSubmit={(values) => {
-                    console.log(fetchData(values.name));
+                    setSearchedHero(values.name);
                 }}
                 >
                 {() => (
@@ -49,107 +61,10 @@ import grid from "../components/grid";
                     </Form>
                 )}
                 </Formik>
-                    {console.log(matchedHeros)}
-                    {matchedHeros.length ?  
-                    (
-                    <div className="grid__background">
-                        <div className="grid">
-                            <div className="grid__box grid__top grid__top--container"></div>
-                            <div className="grid__box grid__top grid__top--container"><h2>Name</h2></div>
-                            <div className="grid__box grid__top grid__top--container"><h2>Intelligence</h2></div>
-                            <div className="grid__box grid__top grid__top--container"><h2>Strenght</h2></div>
-                            <div className="grid__box grid__top grid__top--container"><h2>Speed</h2></div>
-                            <div className="grid__box grid__top grid__top--container"><h2>Durability</h2></div>
-                            <div className="grid__box grid__top grid__top--container"><h2>Power</h2></div>
-                            <div className="grid__box grid__top grid__top--container"><h2>Combat</h2></div>
-                            <div className="grid__box grid__top grid__top--container"></div>
-                        </div>
-                    </div>
-                    )
-                    :
-                    <div></div>
-                }
-                {matchedHeros.map(hero => grid(hero, hero.id))}
+                {matchedHeros.length != 0 && <GridRender props = {matchedHeros} />}
         </div>
         )
-} */
-    class Seeker extends React.Component{
-    state = {
-        matchedHeros : []
-    }
-    constructor(){
-        super();
-        this.fetchData = this.fetchData.bind(this);
-    }
-
-    
-    fetchData(name){
-        axios.get(`https://www.superheroapi.com/api.php/1589015884770221/search/${name}`)
-        .then((response) => {
-            this.setState({matchedHeros : response.data.results});
-            localStorage.setItem("addHeroAction", true);
-        }).catch((error) => {
-            console.log(error)
-        }).bind(this);
-    }     
-
-    
-    render(){
-        return (
-            <div>
-                <h1>Find your next teammate!</h1>
-                    <Formik
-                    initialValues={{ name: ''}}
-                    validate={values => {
-                        const errors = {};
-                        if (!values.name) {
-                            errors.name = 'Required';
-                        } else if (
-                            !/^[a-zA-Z]*$/.test(values.name)
-                        ) {
-                            errors.name = 'Invalid name';
-                        }
-                        return errors;
-                    }}
-                    onSubmit={(values) => {
-                        this.fetchData(values.name);
-                    }}
-                    >
-                    {() => (
-                        <Form>
-                        <Field type="text" name="name" />
-                        <ErrorMessage name="name" component="div" />
-                        <button type="submit">
-                            Submit
-                        </button>
-                        </Form>
-                    )}
-                    </Formik>
-                    {console.log(this.state.matchedHeros)}
-                    {this.state.matchedHeros.length ?  
-                        (
-                        <div className="grid__background">
-                            <div className="grid">
-                                <div className="grid__box grid__top grid__top--container"></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Name</h2></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Intelligence</h2></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Strenght</h2></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Speed</h2></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Durability</h2></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Power</h2></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Combat</h2></div>
-                                <div className="grid__box grid__top grid__top--container"></div>
-                            </div>
-                        </div>
-                        )
-                        :
-                        <div></div>
-                    }
-                    {this.state.matchedHeros.map(hero => grid(hero, hero.id))}
-            </div>
-            )
-    }
-} 
+    } 
 
 
 export default Seeker; 

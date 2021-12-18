@@ -28,6 +28,11 @@ module.exports = {
               }
         ]
     },
+    resolve: {
+        alias: {
+          react: path.resolve('./node_modules/react'),
+        },
+      },
     output: {
         filename: 'transformed.js',
         path: path.resolve(__dirname,'/build.js')

@@ -1,10 +1,18 @@
 import React from "react";
-import {addToTeam, deleteFromTeam} from "./actions"
+import {addToTeam, deleteFromTeam} from "../functions.js/actions"
 
 export default (hero, id) => {
     const addHeroAction = localStorage.getItem("addHeroAction")
+    const setAddHeroAction = (status) => {
+        if(status){
+            return addToTeam(hero);
+        } else {
+            return deleteFromTeam(hero);
+        }
+    }
+    
     return(
-        <div className="grid" key={id}>
+        <div key={id} className="grid">
             <div className="grid__box grid__content">
                 <img className="hero-image" src={hero.image.url} alt="hero image"/>
             </div>
@@ -30,7 +38,7 @@ export default (hero, id) => {
                 {hero.powerstats.combat}%
             </div>
             <div className="grid__box grid__content">
-                { addHeroAction ? addToTeam(hero) : deleteFromTeam(hero)}
+                { setAddHeroAction(addHeroAction)}
             </div>
         </div>
     )
