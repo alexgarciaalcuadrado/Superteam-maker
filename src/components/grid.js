@@ -1,13 +1,13 @@
 import React from "react";
 import {addToTeam, deleteFromTeam} from "../functions.js/actions"
 
-export default (hero, id) => {
+export default (hero, id, prevHeros) => {
     const addHeroAction = localStorage.getItem("addHeroAction")
     const setAddHeroAction = (status) => {
         if(status){
-            return addToTeam(hero);
+            return addToTeam(hero, prevHeros);
         } else {
-            return deleteFromTeam(hero);
+            return deleteFromTeam(hero), prevHeros;
         }
     }
     

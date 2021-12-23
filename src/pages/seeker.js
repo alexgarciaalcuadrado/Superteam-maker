@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from "axios";
 require("babel-core/register");
 require("babel-polyfill");
 import GridRender from "../components/gridRender";
-import Home from "./home";
 
 async function getHeros(name) {
     return axios.get(
@@ -13,10 +12,10 @@ async function getHeros(name) {
     );
 } 
 
-const Seeker = (props) => {
-    const heros = props.heros;
-    console.log(heros)
-    const navigate = useNavigate();         
+const Seeker = () => {
+    const location = useLocation();
+    const prevHeros = location.state.heros;
+             
     const [searchedHero, setSearchedHero] = useState("")
     const [matchedHeros, setMatchedHeros] = useState([]); 
 
@@ -32,7 +31,9 @@ const Seeker = (props) => {
 
     return (
         <div>
-            <button onClick={() => {<Home heros={"hero1"}/>}}>Go back home</button>
+            <nav>
+                    <Link to="/home" >Go home</Link>
+                </nav>
             <h1>Find your next teammate!</h1>
                 <Formik
                 initialValues={{ name: ''}}
@@ -61,7 +62,7 @@ const Seeker = (props) => {
                     </Form>
                 )}
                 </Formik>
-                {matchedHeros.length != 0 && <GridRender props = {matchedHeros} />}
+                {matchedHeros.length != 0 && <GridRender matchedHeros = {matchedHeros} prevHeros = {prevHeros} />}
         </div>
         )
     } 

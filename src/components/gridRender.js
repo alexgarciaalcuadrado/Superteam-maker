@@ -1,7 +1,8 @@
 import React from "react";
 import grid from "./grid";
 
-const GridRender = (response) =>{
+const GridRender = (props) =>{
+    const prevHeros = props.prevHeros;
     return( 
     <div className="grid__background">
     <div className="grid">
@@ -16,7 +17,7 @@ const GridRender = (response) =>{
         <div className="grid__box grid__top grid__top--container"></div>
     </div>
     <>
-    {response.props.map(hero => grid(hero, hero.id))}
+    {props.matchedHeros.map(hero => grid(hero, hero.id, prevHeros))} 
     </>
     </div>)
 }

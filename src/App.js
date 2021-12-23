@@ -9,17 +9,30 @@ import NotFound from "./pages/notFound";
 import Login from "./pages/login";
 
 
-const App = () => (
+ const App = () => (
         <BrowserRouter history={createBrowserHistory}> 
         <Routes>
             <Route path="/" element={<Login />}/>
-            <Route path="/home" element={<Home />}/>
-            <Route path="seeker" element={<Seeker />} />
+            <Route path="/home" element={<Home />}/> 
+            <Route path="/seeker" element={<Seeker />} />
+            <Route path="seeker" element={<Seeker />} /> 
             <Route path="*" element={<NotFound />}/>
         </Routes>   
     </BrowserRouter>
-)
+) 
 
+/* const Stack = createNativeStackNavigator();
+
+const App = () => (
+    <NavigationContainer>
+        <Stack.Navigator>
+        <Stack.Screen name="/" component={Login} />
+        <Stack.Screen name="/home" component={Home} />
+        <Stack.Screen name="/seeker" component={Seeker} />
+        </Stack.Navigator>
+        </NavigationContainer>
+)
+ */
 ReactDOM.render(
     <App />,
     document.getElementById("root"))
