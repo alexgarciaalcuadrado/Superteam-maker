@@ -7,14 +7,13 @@ require("babel-polyfill");
 import GridRender from "../components/gridRender";
 
 async function getHeros(name) {
-    return axios.get(
+    return await axios.get(
         `https://www.superheroapi.com/api.php/1589015884770221/search/${name}`
     );
 } 
 
+
 const Seeker = () => {
-    const location = useLocation();
-    const prevHeros = location.state.heros;
              
     const [searchedHero, setSearchedHero] = useState("")
     const [matchedHeros, setMatchedHeros] = useState([]); 
@@ -62,7 +61,7 @@ const Seeker = () => {
                     </Form>
                 )}
                 </Formik>
-                {matchedHeros.length != 0 && <GridRender matchedHeros = {matchedHeros} prevHeros = {prevHeros} />}
+                {matchedHeros.length != 0 && <GridRender matchedHeros = {matchedHeros} />}
         </div>
         )
     } 

@@ -1,5 +1,8 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const path = require("path");
+
+const appPath = path.resolve(__dirname, "src/App");
 
 const htmlPlugin = new HtmlWebPackPlugin({
     template: "src/index.html",
@@ -7,9 +10,11 @@ const htmlPlugin = new HtmlWebPackPlugin({
    });
 
 module.exports = {
+    target: 'web',
     mode: 'development',
-    entry:path.resolve(__dirname, "src/App"),
+    entry : appPath,
     module:{
+        exprContextCritical: false,
         rules: [
             {
             test: /\.js$/,
@@ -24,20 +29,23 @@ module.exports = {
                   "style-loader",
                   "css-loader",
                   "sass-loader",
-                ],
+                ]
             }
         ]
     },
     resolve: {
         alias: {
           react: path.resolve('./node_modules/react'),
-        },
+        }
       },
     output: {
         filename: 'transformed.js',
         path: path.resolve(__dirname,'/build.js')
     },
-    plugins:[htmlPlugin],
+    plugins:[
+      htmlPlugin,
+      new NodePolyfillPlugin()
+    ],
     devServer:{
         historyApiFallback: true
     }

@@ -3,8 +3,6 @@ import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
-
-
 const Login = () => {
     const history = useNavigate();
     let logInError = {};
@@ -33,8 +31,6 @@ const Login = () => {
                     let token = response.data.token
                     localStorage.setItem("token", token);
                     localStorage.setItem("addHeroAction", false);
-                    const prevHeros = localStorage.getItem("heros") ? localStorage.getItem("heros") : [];
-                    localStorage.setItem("heros", prevHeros);
                     history("/home")
                 })
                 .catch(error => {

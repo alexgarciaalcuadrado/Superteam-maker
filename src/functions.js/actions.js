@@ -1,35 +1,28 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Navigate } from 'react-router-dom';
 
-const addToTeam = (hero, prevHeros) => {
+const addToTeam = (hero) => {
     const [goHome, setGoHome] = useState(false)
-    const [newHeros, setNewHeros] = useState(prevHeros)
+
     const onClick = (e) => {
-        e.preventDefault();
-        const previousHeros = localStorage.getItem("heros");
-        //const newHeros = [...previousHeros, ...hero];
-        setNewHeros(prevState => {return {...prevState, ...hero}})
-        localStorage.setItem("heros", newHeros);
-        //newHeros.push(hero)
-        //
+        
+        
         localStorage.setItem("addHeroAction", false);
-        setGoHome({ goHome : true})
+        //setGoHome({ goHome : true})
     }
     
-    
+
     return(
         <div>
             <button onClick={onClick}>Add to my team</button>
-            {goHome && <Navigate to="/home" state={{heros : newHeros}}/> }
+            {goHome && <Navigate to="/home"/> }
         </div>
     )
 };
 
-const deleteFromTeam = (hero, prevHeros) => {
+const deleteFromTeam = (hero) => {
     const onClick = (e) =>{
         e.preventDefault();
-        let previousHeros = prevHeros
-        console.log(previousHeros)
     }
     return(
         <div>

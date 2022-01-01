@@ -1,22 +1,17 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import grid from "../components/grid";
 
-
-
 const Home  = () => {
-    const location = useLocation();
-    const newHeros = location.state; 
-    //const heros = newHeros ? newHeros : [] 
-    const heros = localStorage.getItem("heros") ? localStorage.getItem("heros") : [];
-    //console.log(heros)
+    const team =  []; 
+    
     return(
         <div>
                 <nav>
-                    <Link to="/seeker" state={{ heros: heros }}>Seek new heros!</Link>
+                    <Link to="/seeker">Seek new heros!</Link>
                 </nav> 
                 <h1>Your team</h1>
-                {heros.length ?  
+                {team.length ?  
                         (
                         <div className="grid__background">
                             <div className="grid">
@@ -30,7 +25,7 @@ const Home  = () => {
                                 <div className="grid__box grid__top grid__top--container"><h2>Combat</h2></div>
                                 <div className="grid__box grid__top grid__top--container"></div>
                             </div>
-                            {heros.map(hero => grid(hero, hero.id))}
+                            {team.map(hero => grid(hero, hero.id))}
                         </div>
                         )
                         :

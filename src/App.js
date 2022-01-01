@@ -9,6 +9,8 @@ import NotFound from "./pages/notFound";
 import Login from "./pages/login";
 
 
+
+
  const App = () => (
         <BrowserRouter history={createBrowserHistory}> 
         <Routes>
@@ -21,19 +23,8 @@ import Login from "./pages/login";
     </BrowserRouter>
 ) 
 
-/* const Stack = createNativeStackNavigator();
 
-const App = () => (
-    <NavigationContainer>
-        <Stack.Navigator>
-        <Stack.Screen name="/" component={Login} />
-        <Stack.Screen name="/home" component={Home} />
-        <Stack.Screen name="/seeker" component={Seeker} />
-        </Stack.Navigator>
-        </NavigationContainer>
-)
- */
 ReactDOM.render(
-    <App />,
+        <App />,
     document.getElementById("root"))
 

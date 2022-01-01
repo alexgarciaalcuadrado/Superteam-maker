@@ -1,13 +1,13 @@
 import React from "react";
 import {addToTeam, deleteFromTeam} from "../functions.js/actions"
 
-export default (hero, id, prevHeros) => {
+export default (hero, id) => {
     const addHeroAction = localStorage.getItem("addHeroAction")
     const setAddHeroAction = (status) => {
         if(status){
-            return addToTeam(hero, prevHeros);
+            return addToTeam(hero);
         } else {
-            return deleteFromTeam(hero), prevHeros;
+            return deleteFromTeam(hero);
         }
     }
     
@@ -16,6 +16,7 @@ export default (hero, id, prevHeros) => {
             <div className="grid__box grid__content">
                 <img className="hero-image" src={hero.image.url} alt="hero image"/>
             </div>
+            {console.log(hero.image.url)}
             <div className="grid__box grid__content">
                 {hero.name}
             </div>
