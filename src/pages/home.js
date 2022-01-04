@@ -1,36 +1,26 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
-import grid from "../components/grid";
+import { getHeros } from "../firebaseConfig";
+import GridRender from "../components/gridRender";
+
 
 const Home  = () => {
-    const team =  []; 
+    const [team, setTeam] = useState([]);
+    useEffect(() => {
+      getHeros.then((res) => {
+        res.splice(0, 1)
+        setTeam({ team : res})
+        })  
+    }, [])
     
     return(
         <div>
                 <nav>
                     <Link to="/seeker">Seek new heros!</Link>
-                </nav> 
+                </nav>  
                 <h1>Your team</h1>
-                {team.length ?  
-                        (
-                        <div className="grid__background">
-                            <div className="grid">
-                                <div className="grid__box grid__top grid__top--container"></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Name</h2></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Intelligence</h2></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Strenght</h2></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Speed</h2></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Durability</h2></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Power</h2></div>
-                                <div className="grid__box grid__top grid__top--container"><h2>Combat</h2></div>
-                                <div className="grid__box grid__top grid__top--container"></div>
-                            </div>
-                            {team.map(hero => grid(hero, hero.id))}
-                        </div>
-                        )
-                        :
-                        <div></div>
-                    }
+                {team.length != 0 && <GridRender matchedHeros = {team.team}/>} 
+                
                     
             </div>
     )

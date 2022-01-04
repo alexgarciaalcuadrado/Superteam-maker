@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from "axios";
 require("babel-core/register");
@@ -13,20 +13,17 @@ async function getHeros(name) {
 } 
 
 
-const Seeker = () => {
-             
+const Seeker = () => {      
     const [searchedHero, setSearchedHero] = useState("")
     const [matchedHeros, setMatchedHeros] = useState([]); 
 
     useEffect(() => {
         getHeros(searchedHero).then((heros) => {
             const hero = heros.data.response != "error" ? heros.data.results : []
-            localStorage.setItem("addHeroAction", true);
+            localStorage.setItem("addHeroAction", "true");
             setMatchedHeros(hero);
         }, console.error);
     }, [searchedHero]);
-    
-    
 
     return (
         <div>
@@ -61,7 +58,7 @@ const Seeker = () => {
                     </Form>
                 )}
                 </Formik>
-                {matchedHeros.length != 0 && <GridRender matchedHeros = {matchedHeros} />}
+                {matchedHeros.length != 0 && <GridRender matchedHeros = {matchedHeros}/>}
         </div>
         )
     } 

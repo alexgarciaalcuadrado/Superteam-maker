@@ -2,21 +2,18 @@ import React from "react";
 import {addToTeam, deleteFromTeam} from "../functions.js/actions"
 
 export default (hero, id) => {
-    const addHeroAction = localStorage.getItem("addHeroAction")
     const setAddHeroAction = (status) => {
-        if(status){
+        if(status=== "true"){
             return addToTeam(hero);
-        } else {
+        } else if (status === "false"){
             return deleteFromTeam(hero);
         }
     }
-    
     return(
         <div key={id} className="grid">
             <div className="grid__box grid__content">
                 <img className="hero-image" src={hero.image.url} alt="hero image"/>
             </div>
-            {console.log(hero.image.url)}
             <div className="grid__box grid__content">
                 {hero.name}
             </div>
@@ -39,7 +36,7 @@ export default (hero, id) => {
                 {hero.powerstats.combat}%
             </div>
             <div className="grid__box grid__content">
-                { setAddHeroAction(addHeroAction)}
+                { setAddHeroAction(localStorage.getItem("addHeroAction"))}
             </div>
         </div>
     )

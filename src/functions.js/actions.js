@@ -1,14 +1,15 @@
+import {addHero, deleteHero} from "../firebaseConfig"
 import React, {useState, useEffect} from "react";
 import { Navigate } from 'react-router-dom';
 
-const addToTeam = (hero) => {
-    const [goHome, setGoHome] = useState(false)
 
-    const onClick = (e) => {
-        
-        
-        localStorage.setItem("addHeroAction", false);
-        //setGoHome({ goHome : true})
+const addToTeam = (hero) => {
+
+    const [goHome, setGoHome] = useState(false)
+    const onClick = () => {
+        addHero(hero);
+        localStorage.setItem("addHeroAction", "false");
+        setGoHome({ goHome : true})
     }
     
 
@@ -21,8 +22,8 @@ const addToTeam = (hero) => {
 };
 
 const deleteFromTeam = (hero) => {
-    const onClick = (e) =>{
-        e.preventDefault();
+    const onClick = () =>{
+        deleteHero(hero)
     }
     return(
         <div>
