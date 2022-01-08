@@ -9,6 +9,7 @@
   "author": "Alexander García",
   "license": "ISC",
   "dependencies": {
+    "@babel/plugin-proposal-export-default-from": "^7.16.7",
     "@babel/polyfill": "^7.12.1",
     "axios": "^0.24.0",
     "babel-loader": "^8.2.3",
@@ -27,6 +28,7 @@
     "react": "^17.0.2",
     "react-app-polyfill": "^3.0.0",
     "react-dom": "^17.0.2",
+    "react-hot-loader": "^4.13.0",
     "react-router-dom": "^6.0.2",
     "sass": "^1.44.0",
     "sass-loader": "^12.4.0",

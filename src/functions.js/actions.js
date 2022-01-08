@@ -4,15 +4,12 @@ import { Navigate } from 'react-router-dom';
 
 
 const addToTeam = (hero) => {
-
     const [goHome, setGoHome] = useState(false)
     const onClick = () => {
         addHero(hero);
         localStorage.setItem("addHeroAction", "false");
         setGoHome({ goHome : true})
     }
-    
-
     return(
         <div>
             <button onClick={onClick}>Add to my team</button>
@@ -23,7 +20,9 @@ const addToTeam = (hero) => {
 
 const deleteFromTeam = (hero) => {
     const onClick = () =>{
-        deleteHero(hero)
+        deleteHero(hero);
+        
+        return <Navigate to="/home"/>
     }
     return(
         <div>

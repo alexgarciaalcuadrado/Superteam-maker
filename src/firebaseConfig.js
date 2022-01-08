@@ -1,6 +1,9 @@
 import { initializeApp } from "firebase/app";
-import { onSnapshot, query, where } from 'firebase/firestore';
-import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore/lite';
+import "regenerator-runtime/runtime";
+import { addDoc, deleteDoc, doc } from 'firebase/firestore';
+//import { getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore/lite';
+import { getFirestore, collection } from 'firebase/firestore'
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAFaQGBrdIb2mTNvhdh3YRGp58zvXAY_U8",
@@ -16,15 +19,6 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 const colRef = collection(db, "team")
  
-
-
-const getHeros = getDocs(colRef)
-.then((snap) => {{
-    let data = snap.docs.map(doc => doc.data())
-    return data;
-}}).catch(err => {console.log(err)})    
-    
-
 /* const q = query(colRef, where("combat", "!=", "1"))*/
 
 
@@ -46,8 +40,10 @@ const addHero = (hero) => {
 }
 
 const deleteHero = (hero) => {
+    //const q = query(colRef, hero.id);
     const docRef = doc(db, "team", hero.id);
     deleteDoc(docRef);
 }
 
-export {addHero, deleteHero, getHeros}
+
+export {addHero, deleteHero, colRef}

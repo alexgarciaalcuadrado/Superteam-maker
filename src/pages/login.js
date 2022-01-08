@@ -1,13 +1,32 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Formik } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import axios from "axios";
 
-const Login = () => {
-    const history = useNavigate();
+
+const Login = (props) => {
+  const [token, setToken] = useState(false);
+
+  useEffect(() => {
+      if(localStorage.getItem("token") === null){
+        setToken(false);
+      } else {
+        setToken(true);
+      }
+      console.log(token);
+  }, [token]) 
+
+
+  const verification = () => {
+    if( token && props.isAuth){
+      return <Navigate to="/home"/>
+    }
+  }
+
     let logInError = {};
     return(
         <div>
+          {verification()}
             <Formik
             initialValues={{ email: '', password: '' }}
             validate={values => {
@@ -31,7 +50,8 @@ const Login = () => {
                     let token = response.data.token
                     localStorage.setItem("token", token);
                     localStorage.setItem("addHeroAction", false);
-                    history("/home")
+                    setToken(true);
+                    return <Navigate to="/home"/>
                 })
                 .catch(error => {
                     if (error.response) {

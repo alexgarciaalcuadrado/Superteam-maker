@@ -12,8 +12,10 @@ async function getHeros(name) {
     );
 } 
 
+const token = localStorage.getItem("token");
 
-const Seeker = () => {      
+const Seeker = () => {    
+    
     const [searchedHero, setSearchedHero] = useState("")
     const [matchedHeros, setMatchedHeros] = useState([]); 
 
