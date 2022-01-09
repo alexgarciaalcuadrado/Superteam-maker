@@ -23,24 +23,24 @@ const colRef = collection(db, "team")
 
 
 const addHero = (hero) => {
+    console.log(colRef)
     addDoc(colRef, {
             name : hero.name,
             powerstats :{
-                combat: hero.powerstats.combat,
-                durability: hero.powerstats.durability, 
-                intelligence: hero.powerstats.intelligence,
-                power: hero.powerstats.power,
-                speed: hero.powerstats.speed,
-                strenght : hero.powerstats.strength
+                combat: parseInt(hero.powerstats.combat),
+                durability: parseInt(hero.powerstats.durability), 
+                intelligence: parseInt(hero.powerstats.intelligence),
+                power: parseInt(hero.powerstats.power),
+                speed: parseInt(hero.powerstats.speed),
+                strength : parseInt(hero.powerstats.strength)
             },
-            id: hero.id,
+            id: parseInt(hero.id),
             image: {url : hero.image.url},
             
     } )
 }
 
 const deleteHero = (hero) => {
-    //const q = query(colRef, hero.id);
     const docRef = doc(db, "team", hero.id);
     deleteDoc(docRef);
 }

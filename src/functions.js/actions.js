@@ -1,19 +1,20 @@
 import {addHero, deleteHero} from "../firebaseConfig"
-import React, {useState, useEffect} from "react";
-import { Navigate } from 'react-router-dom';
+import React from "react";
+import { Navigate, useNavigate  } from 'react-router-dom';
 
 
 const addToTeam = (hero) => {
-    const [goHome, setGoHome] = useState(false)
+    const navigate = useNavigate()
     const onClick = () => {
-        addHero(hero);
+        if(localStorage.getItem("teamSize") < 6){
+            addHero(hero);
+        }
         localStorage.setItem("addHeroAction", "false");
-        setGoHome({ goHome : true})
+        navigate("/home")
     }
     return(
         <div>
             <button onClick={onClick}>Add to my team</button>
-            {goHome && <Navigate to="/home"/> }
         </div>
     )
 };
@@ -21,7 +22,6 @@ const addToTeam = (hero) => {
 const deleteFromTeam = (hero) => {
     const onClick = () =>{
         deleteHero(hero);
-        
         return <Navigate to="/home"/>
     }
     return(

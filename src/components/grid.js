@@ -8,7 +8,7 @@ export default (hero, id) => {
         } else if (status === "false"){
             return deleteFromTeam(hero);
         }
-    }
+    } 
     return(
         <div key={id} className="grid">
             <div className="grid__box grid__content">
