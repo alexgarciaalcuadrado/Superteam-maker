@@ -14,28 +14,28 @@ export default (hero, id) => {
             <div className="grid__box grid__content">
                 <img className="hero-image" src={hero.image.url} alt="hero image"/>
             </div>
-            <div className="grid__box grid__content">
-                {hero.name}
+            <div className="grid__box">
+            <h3 className="grid__content">{hero.name}</h3>
             </div>
-            <div className="grid__box grid__content">
-                {hero.powerstats.intelligence}%
+            <div className="grid__box">
+            <h3 className="grid__content">{hero.powerstats.intelligence}%</h3>
             </div>
-            <div className="grid__box grid__content">
-                {hero.powerstats.strength}%
+            <div className="grid__box">
+            <h3 className="grid__content">{hero.powerstats.strength}%</h3>
             </div>
-            <div className="grid__box grid__content">
-                {hero.powerstats.speed}%
+            <div className="grid__box ">
+            <h3 className="grid__content">{hero.powerstats.speed}%</h3>
             </div>
-            <div className="grid__box grid__content">
-                {hero.powerstats.durability}%
+            <div className="grid__box ">
+            <h3 className="grid__content">{hero.powerstats.durability}%</h3>
             </div>
-            <div className="grid__box grid__content">
-                {hero.powerstats.power}%
+            <div className="grid__box">
+            <h3 className="grid__content">{hero.powerstats.power}%</h3>
             </div>
-            <div className="grid__box grid__content">
-                {hero.powerstats.combat}%
+            <div className="grid__box">
+            <h3 className="grid__content">{hero.powerstats.combat}%</h3>   
             </div>
-            <div className="grid__box grid__content">
+            <div className="grid__box">
                 { setAddHeroAction(localStorage.getItem("addHeroAction"))}
             </div>
         </div>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from "axios";
 require("babel-core/register");
 require("babel-polyfill");
 import GridRender from "../components/gridRender";
+import { NavBar } from "../components/navBar";
 
 async function getHeros(name) {
     return await axios.get(
@@ -12,27 +12,33 @@ async function getHeros(name) {
     );
 } 
 
-const token = localStorage.getItem("token");
-
 const Seeker = () => {    
     
     const [searchedHero, setSearchedHero] = useState("")
     const [matchedHeros, setMatchedHeros] = useState([]); 
 
+
     useEffect(() => {
+        let isMounted = true; 
+        if (isMounted) {
         getHeros(searchedHero).then((heros) => {
             const hero = heros.data.response != "error" ? heros.data.results : []
             localStorage.setItem("addHeroAction", "true");
             setMatchedHeros(hero);
         }, console.error);
+    }
+    return () => { isMounted = false };
     }, [searchedHero]);
 
+
+    ///change dynamically the height of seeker class so it fits the grid component
+
     return (
-        <div>
-            <nav>
-                    <Link to="/home" >Go home</Link>
-                </nav>
-            <h1>Find your next teammate!</h1>
+        <div className="seeker__background">
+            <NavBar />
+            <div className="seeker home">
+                <h1 className="title seeker__title"><span>Find your next teammate!</span></h1>
+                <div className="seeker__form">
                 <Formik
                 initialValues={{ name: ''}}
                 validate={values => {
@@ -51,16 +57,27 @@ const Seeker = () => {
                 }}
                 >
                 {() => (
-                    <Form>
-                    <Field type="text" name="name" />
-                    <ErrorMessage name="name" component="div" />
-                    <button type="submit">
-                        Submit
-                    </button>
-                    </Form>
+                    <div className="seeker__form">                  
+                        <Form>
+                        <div>
+                        <label className="form-label seeker__label" name="hero">Write the name of the hero you want</label>
+                        </div>
+                        <div className="seeker__form--inside-flex">
+                        <Field className="form-control form-control-lg input" type="text" name="name" />
+                        <button className="btn btn-dark seeker__btn" type="submit">
+                            Submit
+                        </button>
+                        </div>
+                        <ErrorMessage name="name" component="div" className="error-message"/>
+                        </Form>
+                    </div>  
                 )}
                 </Formik>
+                </div> 
+                <div className="seeker__grid-position">
                 {matchedHeros.length != 0 && <GridRender matchedHeros = {matchedHeros}/>}
+                </div>   
+            </div>
         </div>
         )
     } 

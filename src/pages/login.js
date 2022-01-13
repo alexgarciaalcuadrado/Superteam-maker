@@ -13,8 +13,7 @@ const Login = (props) => {
       } else {
         setToken(true);
       }
-      console.log(token);
-  }, [token]) 
+  }, []) 
 
 
   const verification = () => {
@@ -25,23 +24,27 @@ const Login = (props) => {
 
     let logInError = {};
     return(
-        <div>
+      <div className="login__background">
+        <div className="login container">
           {verification()}
+          <h1 className="display-1 title login__title">Make a team as <span>powerfull</span> as you!</h1>
+          <h5 className="login-title__sub">Please log in to create your superteam</h5>
             <Formik
             initialValues={{ email: '', password: '' }}
             validate={values => {
             const errors = {};
+            
             if (!values.email) {
               errors.email = 'Required';
             } else if (
               !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
             ) {
               errors.email = 'Invalid email address';
-            }
+            } 
             
             if (!values.password){
                 errors.password = "Required";
-            }
+            } 
             return errors;
             }}
             onSubmit={(values) => {
@@ -75,8 +78,10 @@ const Login = (props) => {
               handleSubmit
             }) => (
             <form onSubmit={handleSubmit}>
-                <label name="email">Your email</label>
+                <label className="form-label label" name="email">Email</label>
+                <br />
               <input
+                className="form-control form-control-lg input"
                 type="email"
                 name="email"
                 onChange={handleChange}
@@ -84,8 +89,11 @@ const Login = (props) => {
                 value={values.email}
               />
               {errors.email && touched.email && errors.email}
-              <label name="password">Your password</label>
+              <br />
+              <label className="form-label label " name="password">Password</label>
+              <br />
               <input
+                className="form-control form-control-lg input"
                 type="password"
                 name="password"
                 onChange={handleChange}
@@ -93,13 +101,16 @@ const Login = (props) => {
                 value={values.password}
               />
               {errors.password && touched.password && errors.password}
-              <button type="submit">
+              <br />
+              <button type="submit" className="btn btn-danger">
                 Submit
               </button>
             </form>
             )}
             </Formik>
+            
         </div>
+      </div>
     )
 
 }

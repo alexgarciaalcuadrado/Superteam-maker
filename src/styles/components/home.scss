@@ -1,0 +1,37 @@
+.home{
+    background-color: $primary-color-white;
+    margin: 0 2rem;
+
+    &__background{
+        @include main-background;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover
+    }
+
+    &__padding{
+        padding: 0 2rem;
+    }
+
+    &__title{
+        font-weight: lighter;
+        font-style: italic;
+        padding: 1rem 0 0 3rem;
+    }
+
+    &__hr{
+        height: 1px;
+        width: 28rem;
+        position: relative;
+        bottom: 15px;
+        color: red;
+    }
+
+    &__no-heros{
+        height: 100vh;
+
+        h3{
+            font-size: 2rem;
+        }
+    }
+}

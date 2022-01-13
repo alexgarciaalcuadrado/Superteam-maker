@@ -17,6 +17,17 @@ module.exports = {
         exprContextCritical: false,
         rules: [
             {
+                test: /\.(jpe?g|gif|png|svg)$/i,
+                use: [
+                {
+                  loader: 'url-loader',
+                  options: {
+                    limit: 10000
+                  }
+                }
+              ]
+            },
+            {
             test: /\.js$/,
             exclude: /node_modules/,
             use: {

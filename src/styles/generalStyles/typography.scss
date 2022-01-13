@@ -1,0 +1,17 @@
+span{
+    background-image: linear-gradient(90deg, rgba(251,8,0,1) 0%, rgba(226,38,38,1) 44%, rgba(255,145,0,1) 100%);
+    @include gradient-config;
+}
+
+.title{
+    font-size: 3.5rem;
+}
+
+.label{
+    font-weight: 600;
+    color: #8e0413;
+}
+
+.input{
+    width: 300px;
+}

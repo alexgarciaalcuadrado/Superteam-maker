@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import "regenerator-runtime/runtime";
 import { addDoc, deleteDoc, doc } from 'firebase/firestore';
-//import { getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore/lite';
 import { getFirestore, collection } from 'firebase/firestore'
 
 
@@ -18,12 +17,9 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 const db = getFirestore();
 const colRef = collection(db, "team")
- 
-/* const q = query(colRef, where("combat", "!=", "1"))*/
 
 
 const addHero = (hero) => {
-    console.log(colRef)
     addDoc(colRef, {
             name : hero.name,
             powerstats :{

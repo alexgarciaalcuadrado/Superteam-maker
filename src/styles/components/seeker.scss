@@ -1,0 +1,41 @@
+.seeker{
+    height: 100%;
+    padding: 1rem;
+
+    &__background{
+        @include main-background
+    }
+
+    &__title{
+        text-align: center;
+        font-weight: lighter;
+        border-bottom: 9px solid white;
+        border-image : linear-gradient(276deg, rgba(255,255,255,1) 0%, rgba(255,102,25,1) 44%, rgba(255,255,255,1) 100%) 1 / 2px;
+    }
+
+    &__form{
+        height: 100vh;
+        display: flex;
+        padding: 1rem 2rem;
+        flex-direction: column;
+
+        &--inside-flex{
+            display: flex;
+        }
+    }
+
+    &__label{
+        font-size: 22px;
+    }
+
+    &__btn{
+        position: relative;
+        left: 2rem;
+    }
+
+    &__grid-position{
+        position: relative;
+        bottom: 25rem;
+    }
+
+}

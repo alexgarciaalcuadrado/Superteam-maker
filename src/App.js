@@ -23,15 +23,9 @@ const App = () => {
     return (
         <BrowserRouter history={createBrowserHistory}> 
         <Routes>
-            <Route exact path="/" element={<Login isAuth={token}/>}/> 
-            {/* <Route path="/home" element={<PrivateRoute />}>
-                <Route path="/home" element={<Home />}/>
-            </Route> */}
-            <Route path="/home" element={token ? <Home /> : <Navigate to="/"/>}/>
-            <Route path="/seeker" element={token ? <Seeker /> : <Navigate to="/"/>}/>
-            {/* <Route path="/seeker" element={<PrivateRoute />}>
-                <Route path="/seeker" element={<Seeker />} />
-            </Route> */}            
+            <Route exact path="/" element={<Login isAuth={token}/>}/>
+            <Route exact path="/home" element={token ? <Home /> : <Navigate to="/"/>}/> 
+            <Route exact path="/seeker" element={token ? <Seeker /> : <Navigate to="/"/>}/> 
             <Route path="*" element={<NotFound />}/>
         </Routes>   
     </BrowserRouter>

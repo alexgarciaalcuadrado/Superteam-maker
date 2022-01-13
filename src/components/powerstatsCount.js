@@ -32,15 +32,23 @@ const PowerstatsCount = ({heros}) => {
 
     
     return(
-        <div>
-            <h2>Your team category is: {teamCategory()}</h2>
-            <h2>Your total powerstats count:</h2>
-            <h3>Combat: {combat} points</h3>
-            <h3>Durability: {durability} points</h3>
-            <h3>Intelligence: {intelligence} points</h3>
-            <h3>Power: {power} points</h3>
-            <h3>Speed: {speed} points</h3>
-            <h3>Strength: {strength} points</h3>
+        <div className="powerstats-count">
+            <div className="powerstats-count__right">
+                <h2 className="powerstats-count__title powerstats-count__right--category">Your team category is:</h2>
+                <h2 className="powerstats-count__title powerstats-count__right--category powerstats-count__right--category__span"> {teamCategory()}</h2>
+            </div>
+            <div  className="powerstats-count__left">
+                <h2 className="powerstats-count__title">Your total powerstats count:</h2>
+                <h3 className="powerstats-count__item"><span>-</span> Combat: {combat} points</h3>
+                <h3 className="powerstats-count__item"><span>-</span> Durability: {durability} points</h3>
+                <h3 className="powerstats-count__item"><span>-</span> Intelligence: {intelligence} points</h3>
+                <h3 className="powerstats-count__item"><span>-</span> Power: {power} points</h3>
+                <h3 className="powerstats-count__item"><span>-</span> Speed: {speed} points</h3>
+                <h3 className="powerstats-count__item"><span>-</span> Strength: {strength} points</h3>
+                
+            </div>
+            <div className="powerstats-count__center-line"></div>
+            <div className="clearfix"></div>
         </div>
     )
 }
