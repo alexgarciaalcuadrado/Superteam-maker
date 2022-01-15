@@ -10,3 +10,32 @@
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent;
 }
+
+//// breakpoint
+@mixin breakpoint($point){
+    @if $point == large{
+        @media (max-width : $screen-big){
+            @content
+        }
+    };
+    @if $point == big-medium{
+        @media (max-width : $screen-big-medium){
+            @content
+        }
+    };
+    @if $point == medium{
+        @media (max-width : $screen-medium){
+            @content
+        }
+    };
+    @if $point == medium-small{
+        @media (max-width : $screen-medium-small){
+            @content
+        }
+    };
+    @if $point == small{
+        @media (max-width : $screen-small){
+            @content
+        }
+    }
+}

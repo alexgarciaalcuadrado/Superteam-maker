@@ -16,7 +16,22 @@
     &__title{
         font-weight: lighter;
         font-style: italic;
+        font-size: 5rem;
         padding: 1rem 0 0 3rem;
+
+        @include breakpoint(large){
+            text-align: center;
+            font-size: 6rem;
+        }
+
+        @include breakpoint(medium){
+            font-size: 4rem;
+        }
+
+        @include breakpoint(medium-small){
+            font-size: 3rem;
+            padding: 1rem 0;
+        }
     }
 
     &__hr{
@@ -25,7 +40,17 @@
         position: relative;
         bottom: 15px;
         color: red;
-    }
+
+        @include breakpoint(large){
+            width: 33rem;
+            height: 2px;
+            margin: auto;
+        }
+
+        @include breakpoint(medium){
+            display: none;
+        }
+    }   
 
     &__no-heros{
         height: 100vh;
@@ -35,3 +60,4 @@
         }
     }
 }
+

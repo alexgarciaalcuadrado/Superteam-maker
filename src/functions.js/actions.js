@@ -14,7 +14,7 @@ const addToTeam = (hero) => {
     }
     return(
         <div>
-            <button className="btn btn-warning" onClick={onClick}>Add to my team</button>
+            <button className="btn btn-warning grid__btn" onClick={onClick}>Add to my team</button>
         </div>
     )
 };
@@ -26,7 +26,7 @@ const deleteFromTeam = (hero) => {
     }
     return(
         <div>
-            <button className="btn btn-danger" onClick={onClick}>Delete hero from team</button>
+            <button className="btn btn-danger grid__btn" onClick={onClick}>Delete hero from team</button>
         </div>
     )
 }

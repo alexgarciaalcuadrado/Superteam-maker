@@ -7,20 +7,19 @@ import axios from "axios";
 const Login = (props) => {
   const [token, setToken] = useState(false);
 
+  const verification = () => {
+    if( token && props.isAuth){
+      return <Navigate to="/home"/>
+    }
+  }
+
   useEffect(() => {
       if(localStorage.getItem("token") === null){
         setToken(false);
       } else {
         setToken(true);
       }
-  }, []) 
-
-
-  const verification = () => {
-    if( token && props.isAuth){
-      return <Navigate to="/home"/>
-    }
-  }
+  }, [token]) 
 
     let logInError = {};
     return(
@@ -28,7 +27,7 @@ const Login = (props) => {
         <div className="login container">
           {verification()}
           <h1 className="display-1 title login__title">Make a team as <span>powerfull</span> as you!</h1>
-          <h5 className="login-title__sub">Please log in to create your superteam</h5>
+          <h6 className="login-title__sub">Please log in to create your superteam</h6>
             <Formik
             initialValues={{ email: '', password: '' }}
             validate={values => {
@@ -81,7 +80,7 @@ const Login = (props) => {
                 <label className="form-label label" name="email">Email</label>
                 <br />
               <input
-                className="form-control form-control-lg input"
+                className="form-control form-control-lg input login__input"
                 type="email"
                 name="email"
                 onChange={handleChange}
@@ -93,7 +92,7 @@ const Login = (props) => {
               <label className="form-label label " name="password">Password</label>
               <br />
               <input
-                className="form-control form-control-lg input"
+                className="form-control form-control-lg input login__input"
                 type="password"
                 name="password"
                 onChange={handleChange}

@@ -17,7 +17,6 @@ const GridRender = (props) =>{
                 <div className="grid__box grid__top grid__top--container"></div>
             </div>
             {props.matchedHeros.map(hero => grid(hero, hero.id))} 
-            
             </div>
             )
     }

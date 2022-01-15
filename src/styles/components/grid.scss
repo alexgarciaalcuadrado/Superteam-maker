@@ -6,6 +6,10 @@
     border: 9px solid white;
     border-image : linear-gradient(276deg, rgba(255,255,255,1) 0%, rgba(254,80,80,1) 44%, rgba(255,255,255,1) 100%) 1 / 1px;
  
+    &__phone-layout{
+        display: none;
+    }
+
     &__background{
         margin: 5rem 1rem 0 1rem;
         padding: 0 0 1rem 0;
@@ -32,4 +36,68 @@
     object-fit: cover;
     width: 100%;
     max-height: 100%; 
+}
+
+@include media-breakpoint-down(lg) {
+    .grid__btn{
+        font-size: 13px;
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    .grid{
+        display: none;
+    }
+
+    .grid__phone-layout{
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: repeat(9,auto);
+        border-top: 9px solid white;
+        border-image : linear-gradient(276deg, rgba(255,255,255,1) 0%, rgba(254,80,80,1) 44%, rgba(255,255,255,1) 100%) 1 / 1px;
+    }
+
+    .grid__box{
+        display: flex;
+        align-items: baseline;
+    }
+
+    .grid__content{
+        padding: 0;
+        font-size: 20px;
+
+        @include breakpoint(small){
+            font-size: 15px;
+        }
+    }
+
+    .grid__title-text{
+        padding: 1rem;
+        background: linear-gradient(276deg, rgba(140,58,3,1) 0%, rgba(164,59,0,1) 49%, rgba(255,89,12,1) 100%);
+        @include gradient-config;
+
+        @include breakpoint(small){
+            font-size: 15px;
+            padding: 8px;
+        }
+    }
+
+
+    .hero-image{
+        border-radius: 20px;
+        object-fit: cover;
+        width: 50%;
+        max-height: 50%;
+        display: block;
+        margin: 0 auto; 
+    }
+
+    .grid__btn{
+        font-size: 18px;
+        margin-bottom: 1rem;
+
+        @include breakpoint(small){
+            font-size: 14px;
+        }
+    }
 }

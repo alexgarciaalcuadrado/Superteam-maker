@@ -13,7 +13,8 @@ async function getHeros(name) {
 } 
 
 const Seeker = () => {    
-    
+    const [isError, setIsError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const [searchedHero, setSearchedHero] = useState("")
     const [matchedHeros, setMatchedHeros] = useState([]); 
 
@@ -22,16 +23,22 @@ const Seeker = () => {
         let isMounted = true; 
         if (isMounted) {
         getHeros(searchedHero).then((heros) => {
-            const hero = heros.data.response != "error" ? heros.data.results : []
-            localStorage.setItem("addHeroAction", "true");
-            setMatchedHeros(hero);
+                const error = heros.data.response == "error" ? true : false;
+                setIsError(error);
+                const hero = heros.data.response != "error" ? heros.data.results : [];
+                localStorage.setItem("addHeroAction", "true");
+                setMatchedHeros(hero);
+            
         }, console.error);
     }
     return () => { isMounted = false };
     }, [searchedHero]);
 
-
-    ///change dynamically the height of seeker class so it fits the grid component
+    const errorHandler = () => {
+        if(isError != true){
+            setErrorMessage("The hero you're looking for is not available, please search another one.")
+        }
+    }
 
     return (
         <div className="seeker__background">
@@ -54,6 +61,8 @@ const Seeker = () => {
                 }}
                 onSubmit={(values) => {
                     setSearchedHero(values.name);
+                    errorHandler()
+
                 }}
                 >
                 {() => (
@@ -63,12 +72,13 @@ const Seeker = () => {
                         <label className="form-label seeker__label" name="hero">Write the name of the hero you want</label>
                         </div>
                         <div className="seeker__form--inside-flex">
-                        <Field className="form-control form-control-lg input" type="text" name="name" />
+                        <Field autoComplete="off" className="form-control form-control-lg input seeker__input" type="text" name="name" />
                         <button className="btn btn-dark seeker__btn" type="submit">
                             Submit
                         </button>
                         </div>
                         <ErrorMessage name="name" component="div" className="error-message"/>
+                        {errorMessage}
                         </Form>
                     </div>  
                 )}

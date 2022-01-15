@@ -1,11 +1,40 @@
 .powerstats-count{
 
+    @include breakpoint(large){
+        margin-top: 3rem;
+    }
+
+    @include breakpoint(medium-small){
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+    }
+
     &__right{
         float: right;
+
+        @include breakpoint(big-medium){
+            float: none;
+            padding-left: 4rem;
+        }
+
+        @include breakpoint(medium-small){
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
         &--category{
             position: relative;
             right: 4rem;
+
+            @include breakpoint(medium){
+                font-size: 2rem;
+            }
+            @include breakpoint(medium-small){
+                font-size: 23px;
+            }
 
             &__span{
                 font-family: monospace;
@@ -13,12 +42,24 @@
                 font-size: 6rem;
                 background-image: linear-gradient(90deg, rgba(251,160,0,1) 0%, rgba(251,91,5,1) 44%, rgba(255,55,0,1) 100%);
                 @include gradient-config;
+
+                @include breakpoint(medium){
+                    font-size: 2rem;
+                }
+
+                @include breakpoint(medium-small){
+                    font-size: 23px;
+                }
             }
         }
     }
 
     &__left{
         float: left;
+
+        @include breakpoint(big-medium){
+            float: none;
+        }
     }
 
     &__center-line{
@@ -33,6 +74,10 @@
 
     &__title{
         font-weight: 400;
+        
+        @include breakpoint(medium-small){
+            font-size: 23px;
+        }
     }
 
     &__item{
@@ -41,9 +86,24 @@
         position: relative;
         left: 2rem;
         padding: 0.5rem;
+
+        @include breakpoint(medium-small){
+            font-size: 23px;
+            position: initial;
+        }
+
+        @include breakpoint(small){
+            font-size: 19px;
+        }
     }
 }
 
 .clearfix{
     clear: both;
+}
+
+@include media-breakpoint-down(xl){
+    .powerstats-count__center-line{
+        display: none;
+    }
 }
