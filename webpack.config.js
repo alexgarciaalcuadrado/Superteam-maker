@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+const dotenv = require('dotenv');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const path = require("path");
@@ -8,6 +10,13 @@ const htmlPlugin = new HtmlWebPackPlugin({
     template: "src/index.html",
     filename: "./index.html"
    });
+
+const env = dotenv.config().parsed;
+
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
 module.exports = {
     target: 'web',
@@ -55,7 +64,9 @@ module.exports = {
     },
     plugins:[
       htmlPlugin,
-      new NodePolyfillPlugin()
+      new NodePolyfillPlugin(),
+      new webpack.DefinePlugin(envKeys)
+      
     ],
     devServer:{
         historyApiFallback: true
