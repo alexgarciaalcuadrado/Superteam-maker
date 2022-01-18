@@ -11,12 +11,6 @@ const htmlPlugin = new HtmlWebPackPlugin({
     filename: "./index.html"
    });
 
-const env = dotenv.config().parsed;
-
-const envKeys = Object.keys(env).reduce((prev, next) => {
-  prev[`process.env.${next}`] = JSON.stringify(env[next]);
-  return prev;
-}, {});
 
 module.exports = {
     target: 'web',
@@ -64,8 +58,7 @@ module.exports = {
     },
     plugins:[
       htmlPlugin,
-      new NodePolyfillPlugin(),
-      new webpack.DefinePlugin(envKeys)
+      new NodePolyfillPlugin()
       
     ],
     devServer:{

@@ -5,13 +5,13 @@ import { getFirestore, collection } from 'firebase/firestore'
 
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: "AIzaSyAFaQGBrdIb2mTNvhdh3YRGp58zvXAY_U8",
   authDomain: "superteam-maker.firebaseapp.com",
-  databaseURL: process.env.FIREBASE_DATABASEURL,
+  databaseURL: "https://superteam-maker-default-rtdb.firebaseio.com/",
   projectId: "superteam-maker",
   storageBucket: "superteam-maker.appspot.com",
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_PROJECT_ID 
+  messagingSenderId: "85720917402",
+  appId: "1:85720917402:web:8beb034c6ab675cf1c8623"
 };
 
 initializeApp(firebaseConfig);
