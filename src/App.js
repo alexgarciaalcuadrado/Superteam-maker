@@ -10,7 +10,8 @@ import Login from "./pages/login";
 
 
 const App = () => {
-    const [token, setToken] = useState(false);
+    const initializeState = () => (localStorage.getItem("token"));
+    const [token, setToken] = useState(initializeState);
 
   useEffect(() => {
       if(localStorage.getItem("token") === null){
